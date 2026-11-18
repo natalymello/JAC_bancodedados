@@ -1,0 +1,6 @@
+SELECT COUNT(*) FROM curso;
+SELECT COUNT(*) FROM turma;
+SELECT COUNT(*) FROM estudante;
+SELECT COUNT(*) FROM orientador;
+SELECT COUNT(*) FROM peca;
+SELECT COUNT(*) FROM elenco;
