@@ -1,0 +1,297 @@
+
+/* =====================================
+   1. CONFIGURAÇÕES GERAIS
+===================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --jac-red: #E94343;
+    --jac-blue: #315FA8;
+    --jac-yellow: #F2C735;
+
+    --background: #F2EFE6;
+    --surface: #FFFFFF;
+    --dark: #252525;
+    --text: #333333;
+    --muted: #77736B;
+
+    --border: #DED9CD;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+}
+
+
+/* =====================================
+   2. ESTRUTURA PRINCIPAL
+===================================== */
+
+.app-container {
+    display: grid;
+    grid-template-columns: 255px 1fr;
+    min-height: 100vh;
+}
+
+
+/* =====================================
+   3. MENU LATERAL
+===================================== */
+
+.sidebar {
+    background-color: var(--dark);
+    color: white;
+
+    min-height: 100vh;
+    padding: 28px 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+
+/* LOGO */
+
+.logo-container {
+    padding: 10px 8px 30px;
+    border-bottom: 2px solid #444;
+}
+
+.logo-container h1 {
+    font-family: Georgia, serif;
+    font-size: 42px;
+    letter-spacing: 4px;
+    color: var(--jac-yellow);
+}
+
+.logo-container span {
+    font-size: 11px;
+    color: #D6D1C7;
+    letter-spacing: 1px;
+}
+
+
+/* NAVEGAÇÃO */
+
+.sidebar-nav {
+    margin-top: 30px;
+}
+
+.sidebar-nav h3 {
+    font-size: 10px;
+    color: #AAA49A;
+    letter-spacing: 1.5px;
+
+    margin: 24px 0 12px 8px;
+}
+
+.nav-link {
+    display: block;
+
+    text-decoration: none;
+    color: #E5E1D8;
+
+    padding: 12px 14px;
+    margin-bottom: 5px;
+
+    border-radius: 8px;
+    border-left: 3px solid transparent;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.nav-link:hover {
+    background-color: #3B3B3B;
+    color: white;
+}
+
+.nav-link.active {
+    background-color: var(--jac-red);
+    color: white;
+    border-left-color: var(--jac-yellow);
+    font-weight: bold;
+}
+
+
+/* RODAPÉ DO MENU */
+
+.sidebar-footer {
+    margin-top: auto;
+
+    border-top: 1px solid #444;
+    padding-top: 20px;
+
+    color: #DDD;
+    font-size: 12px;
+}
+
+.sidebar-footer span {
+    display: block;
+    margin-top: 5px;
+    color: #AAA49A;
+}
+
+
+/* =====================================
+   4. CONTEÚDO PRINCIPAL
+===================================== */
+
+.main-content {
+    padding: 35px 40px;
+    min-width: 0;
+}
+
+
+/* =====================================
+   5. CABEÇALHO
+===================================== */
+
+.top-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 35px;
+}
+
+.page-title h2 {
+    font-family: Georgia, serif;
+    font-size: 30px;
+    color: var(--dark);
+    margin-bottom: 8px;
+}
+
+.page-title p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.user-info {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+
+    padding: 12px 18px;
+    border-radius: 30px;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+/* =====================================
+   6. RESPONSIVIDADE
+===================================== */
+
+@media (max-width: 900px) {
+
+    .app-container {
+        grid-template-columns: 210px 1fr;
+    }
+
+    .main-content {
+        padding: 25px;
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .app-container {
+        display: block;
+    }
+
+    .sidebar {
+        position: relative;
+        height: auto;
+        min-height: auto;
+    }
+
+    .sidebar-nav {
+        margin-top: 15px;
+    }
+
+    .sidebar-footer {
+        margin-top: 20px;
+    }
+
+    .main-content {
+        padding: 22px 16px;
+    }
+
+    .top-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+}
+
+/* =====================================
+   7. IDENTIDADE ARTÍSTICA JAC
+===================================== */
+
+/* Pequena composição de cores no título */
+
+.page-title h2::before {
+    content: "";
+
+    display: inline-block;
+
+    width: 10px;
+    height: 25px;
+
+    background-color: var(--jac-red);
+
+    margin-right: 40px;
+
+    vertical-align: -4px;
+
+    border-radius: 2px;
+
+    box-shadow:
+        14px 0 0 var(--jac-yellow),
+        28px 0 0 var(--jac-blue);
+}
+
+
+/* Detalhe geométrico no logotipo */
+
+.logo-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-container::after {
+    content: "";
+
+    position: absolute;
+
+    width: 45px;
+    height: 45px;
+
+    right: 12px;
+    top: 12px;
+
+    border: 3px solid var(--jac-red);
+
+    border-radius: 50% 15% 50% 15%;
+
+    transform: rotate(35deg);
+
+    box-shadow:
+        inset 0 0 0 5px var(--dark),
+        inset 0 0 0 8px var(--jac-yellow);
+}
