@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JAC - Estudantes</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- MENU LATERAL -->
+        <aside class="sidebar">
+
+            <div class="logo-container">
+                <h1>JAC</h1>
+                <span>Projeto de Artes Cênicas</span>
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <h3>MENU PRINCIPAL</h3>
+
+                <a href="../index.html" class="nav-link">
+                    Início
+                </a>
+
+                <a href="cursos.html" class="nav-link">
+                    Cursos
+                </a>
+
+                <a href="../index.html" class="nav-link">
+                    Turmas
+                </a>
+
+                <a href="orientadores.html" class="nav-link">
+                    Orientadores
+                </a>
+
+                <a href="estudantes.html" class="nav-link active">
+                    Estudantes
+                </a>
+
+                <h3>PRODUÇÃO TEATRAL</h3>
+
+                <a href="pecas.html" class="nav-link">
+                    Peças
+                </a>
+
+                <a href="elenco.html" class="nav-link">
+                    Elenco
+                </a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>JAC - Gestão Teatral</p>
+                <span>Versão 1.0</span>
+            </div>
+
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-content">
+
+            <header class="top-header">
+
+                <div class="page-title">
+                    <h2>Estudantes</h2>
+                    <p>Gerenciamento dos estudantes participantes do projeto.</p>
+                </div>
+
+                <div class="user-info">
+                    <span>Administrador</span>
+                </div>
+
+            </header>
+
+            <!-- FORMULÁRIO -->
+            <section class="content-section">
+
+                <div class="section-header">
+                    <div>
+                        <h2>Cadastrar estudante</h2>
+                        <p>Preencha os dados para realizar um novo cadastro.</p>
+                    </div>
+                </div>
+
+                <div class="table-container">
+
+                    <form id="estudanteForm">
+
+                        <div class="form-group">
+                            <label for="nome">Nome completo</label>
+                            <input
+                                type="text"
+                                id="nome"
+                                placeholder="Digite o nome do estudante"
+                                maxlength="100"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="matricula">Matrícula</label>
+                            <input
+                                type="text"
+                                id="matricula"
+                                placeholder="Digite a matrícula"
+                                maxlength="30"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="curso">Curso</label>
+                            <select id="curso" required>
+                                <option value="">Carregando cursos...</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="turma">Turma</label>
+                            <select id="turma" required disabled>
+                                <option value="">Selecione primeiro um curso</option>
+                            </select>
+                        </div>
+
+                        <div class="modal-actions">
+                            <button type="submit" class="btn-primary">
+                                Cadastrar estudante
+                            </button>
+                        </div>
+
+                        <p id="mensagem"></p>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+            <!-- LISTAGEM -->
+            <section class="content-section">
+
+                <div class="section-header">
+                    <div>
+                        <h2>Estudantes cadastrados</h2>
+                        <p>Consulte os estudantes registrados no sistema.</p>
+                    </div>
+                </div>
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Matrícula</th>
+                                <th>Curso</th>
+                                <th>Turma</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="estudantesTable">
+                            <tr>
+                                <td colspan="4">Carregando estudantes...</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/estudantes.js"></script>
+
+</body>
+</html>

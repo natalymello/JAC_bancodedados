@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS orientador (
 CREATE TABLE IF NOT EXISTS estudante (
     id_estudante INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
-    matricula VARCHAR(30) NOT NULL,
+    matricula VARCHAR(30) NOT NULL UNIQUE,
     id_turma INT NOT NULL,
 
     FOREIGN KEY (id_turma)
