@@ -2,91 +2,101 @@
 // =====================================
 // 1. ELEMENTOS HTML
 // =====================================
+
+const API = "http://localhost:3000/api/inscricoes";
+
 const totalTurmas = document.querySelector("#totalTurmas");
-
 const turmaForm = document.querySelector("#turmaForm");
-
-const periodoInput = document.querySelector("#periodo");
-
-const cursoInput = document.querySelector("#curso");
-
+const turmaDisponivel = document.querySelector("#turmaDisponivel");
 const turmasTable = document.querySelector("#turmasTable");
 
+const turmaModal = document.querySelector("#turmaModal");
+const mensagemTurma = document.querySelector("#mensagemTurma");
 
-// =====================================
-// 2. ARMAZENAMENTO
-// =====================================
-
-let turmas = JSON.parse(
-    localStorage.getItem("jac_turmas")
-) || [];
+const botoesAbrirModal = document.querySelectorAll("[data-open-modal]");
+const botaoFecharModal = document.querySelector("#closeModal");
+const botaoCancelar = document.querySelector("#cancelModal");
 
 
 // =====================================
-// 3. SALVAR DADOS
+// 2. CARREGAR TURMAS INSCRITAS
 // =====================================
 
-function salvarTurmas() {
+async function carregarTurmas() {
 
-    localStorage.setItem(
-        "jac_turmas",
-        JSON.stringify(turmas)
-    );
+    try {
+
+        const resposta = await fetch(API);
+
+        if (!resposta.ok) {
+            throw new Error("Não foi possível carregar as turmas.");
+        }
+
+        const turmas = await resposta.json();
+
+        renderizarTurmas(turmas);
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        turmasTable.innerHTML = `
+            <tr>
+                <td colspan="3">Erro ao carregar turmas.</td>
+            </tr>
+        `;
+
+    }
 
 }
 
 
 // =====================================
-// 4. EXIBIR TURMAS
+// 3. MOSTRAR TURMAS NA TABELA
 // =====================================
 
-function renderizarTurmas() {
+function renderizarTurmas(turmas) {
 
     turmasTable.innerHTML = "";
+
     totalTurmas.textContent = turmas.length;
 
     if (turmas.length === 0) {
 
-        const linha = document.createElement("tr");
-        const coluna = document.createElement("td");
-
-        coluna.colSpan = 3;
-        coluna.textContent = "Nenhuma turma cadastrada.";
-
-        linha.appendChild(coluna);
-        turmasTable.appendChild(linha);
+        turmasTable.innerHTML = `
+            <tr>
+                <td colspan="3">Nenhuma turma inscrita na JAC.</td>
+            </tr>
+        `;
 
         return;
+
     }
 
     turmas.forEach(function(turma) {
 
         const linha = document.createElement("tr");
 
-        // Identificação
-        const colunaIdentificacao = document.createElement("td");
-        colunaIdentificacao.textContent = turma.identificacao;
+        const colunaTurma = document.createElement("td");
+        colunaTurma.textContent = turma.identificacao;
 
-        // Curso
         const colunaCurso = document.createElement("td");
         colunaCurso.textContent = turma.curso;
 
-        // Ações
         const colunaAcoes = document.createElement("td");
 
-        const botaoExcluir = document.createElement("button");
+        const botaoRemover = document.createElement("button");
 
-        botaoExcluir.textContent = "Excluir";
-        botaoExcluir.classList.add("btn-delete");
+        botaoRemover.textContent = "Remover inscrição";
+        botaoRemover.classList.add("btn-delete");
 
-        botaoExcluir.addEventListener("click", function() {
-            excluirTurma(turma.id);
+        botaoRemover.addEventListener("click", function() {
+            excluirTurma(turma.id_turma);
         });
 
-        colunaAcoes.appendChild(botaoExcluir);
+        colunaAcoes.appendChild(botaoRemover);
 
-        // Montando a linha
-        linha.appendChild(colunaIdentificacao);
+        linha.appendChild(colunaTurma);
         linha.appendChild(colunaCurso);
         linha.appendChild(colunaAcoes);
 
@@ -98,90 +108,202 @@ function renderizarTurmas() {
 
 
 // =====================================
-// 5. CADASTRAR TURMA
+// 4. CARREGAR TURMAS DISPONÍVEIS
 // =====================================
 
-turmaForm.addEventListener("submit", function(event) {
+async function carregarTurmasDisponiveis() {
 
-    event.preventDefault();
+    turmaDisponivel.innerHTML = `
+        <option value="">Carregando turmas...</option>
+    `;
 
-    // Capturando os valores
-    const periodo = periodoInput.value.trim().toUpperCase();
+    turmaDisponivel.disabled = true;
 
-    const curso = cursoInput.value;
+    try {
 
-    // Validando os campos
-    if (!periodo || !curso) {
+        const resposta = await fetch(`${API}/disponiveis`);
 
-        alert("Preencha todos os campos!");
+        if (!resposta.ok) {
+            throw new Error("Não foi possível carregar as turmas disponíveis.");
+        }
 
-        return;
+        const turmas = await resposta.json();
+
+        turmaDisponivel.innerHTML = `
+            <option value="">Selecione uma turma</option>
+        `;
+
+        if (turmas.length === 0) {
+
+            turmaDisponivel.innerHTML = `
+                <option value="">Todas as turmas já estão inscritas</option>
+            `;
+
+            return;
+
+        }
+
+        turmas.forEach(function(turma) {
+
+            const opcao = document.createElement("option");
+
+            opcao.value = turma.id_turma;
+            opcao.textContent = `${turma.identificacao} - ${turma.curso}`;
+
+            turmaDisponivel.appendChild(opcao);
+
+        });
+
+        turmaDisponivel.disabled = false;
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        turmaDisponivel.innerHTML = `
+            <option value="">Erro ao carregar turmas</option>
+        `;
 
     }
-
-    // Montando a identificação automaticamente
-    const identificacao = `${curso} ${periodo}`;
-
-    // Criando o objeto da turma
-    const novaTurma = {
-
-        id: Date.now(),
-
-        identificacao: identificacao,
-
-        curso: curso
-
-    };
-
-    // Adicionando à lista
-    turmas.push(novaTurma);
-
-    // Salvando os dados
-    salvarTurmas();
-
-    // Atualizando a tabela
-    renderizarTurmas();
-
-    // Limpando o formulário
-    turmaForm.reset();
-
-    // Fechando o modal
-    turmaModal.hidden = true;
-
-    alert("Turma cadastrada com sucesso!");
-
-});
-
-
-// =====================================
-// 6. EXCLUIR TURMA
-// =====================================
-
-function excluirTurma(id) {
-
-    const confirmar = confirm(
-        "Deseja realmente excluir esta turma?"
-    );
-
-    if (!confirmar) {
-        return;
-    }
-
-    turmas = turmas.filter(function(turma) {
-
-        return turma.id !== id;
-
-    });
-
-    salvarTurmas();
-
-    renderizarTurmas();
 
 }
 
 
 // =====================================
-// 7. INICIALIZAÇÃO
+// 5. ABRIR MODAL
 // =====================================
 
-renderizarTurmas();
+botoesAbrirModal.forEach(function(botao) {
+
+    botao.addEventListener("click", function() {
+
+        turmaModal.hidden = false;
+
+        mensagemTurma.textContent = "";
+
+        carregarTurmasDisponiveis();
+
+    });
+
+});
+
+
+// =====================================
+// 6. FECHAR MODAL
+// =====================================
+
+function fecharModal() {
+
+    turmaModal.hidden = true;
+
+    turmaForm.reset();
+
+    mensagemTurma.textContent = "";
+
+}
+
+botaoFecharModal.addEventListener("click", fecharModal);
+
+botaoCancelar.addEventListener("click", fecharModal);
+
+
+// =====================================
+// 7. INSCREVER NOVA TURMA
+// =====================================
+
+turmaForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const id_turma = turmaDisponivel.value;
+
+    if (!id_turma) {
+
+        mensagemTurma.textContent = "Selecione uma turma.";
+        return;
+
+    }
+
+    try {
+
+        const resposta = await fetch(API, {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                id_turma: id_turma
+            })
+
+        });
+
+        const resultado = await resposta.json();
+
+        if (!resposta.ok) {
+            throw new Error(resultado.mensagem || "Erro ao inscrever turma.");
+        }
+
+        alert(resultado.mensagem);
+
+        fecharModal();
+
+        carregarTurmas();
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        mensagemTurma.textContent = erro.message;
+
+    }
+
+});
+
+
+// =====================================
+// 8. REMOVER INSCRIÇÃO
+// =====================================
+
+async function excluirTurma(id) {
+
+    const confirmar = confirm(
+        "Deseja realmente remover a inscrição desta turma na JAC?"
+    );
+
+    if (!confirmar) return;
+
+    try {
+
+        const resposta = await fetch(`${API}/${id}`, {
+            method: "DELETE"
+        });
+
+        const resultado = await resposta.json();
+
+        if (!resposta.ok) {
+            throw new Error(resultado.mensagem || "Erro ao remover inscrição.");
+        }
+
+        alert(resultado.mensagem);
+
+        carregarTurmas();
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        alert(erro.message);
+
+    }
+
+}
+
+
+// =====================================
+// 9. INICIALIZAÇÃO
+// =====================================
+
+carregarTurmas();

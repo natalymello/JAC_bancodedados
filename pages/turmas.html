@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JAC - Turmas</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- MENU LATERAL -->
+    <aside class="sidebar">
+
+        <div class="logo-container">
+            <h1>JAC</h1>
+            <span>Projeto de Artes Cênicas</span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <h3>MENU PRINCIPAL</h3>
+
+            <a href="../index.html" class="nav-link">
+                Início
+            </a>
+
+            <a href="turmas.html" class="nav-link active">
+                Turmas
+            </a>
+
+            <a href="orientadores.html" class="nav-link">
+                Orientadores
+            </a>
+
+            <a href="estudantes.html" class="nav-link">
+                Estudantes
+            </a>
+
+            <h3>PRODUÇÃO TEATRAL</h3>
+
+            <a href="pecas.html" class="nav-link">
+                Peças
+            </a>
+
+            <a href="elenco.html" class="nav-link">
+                Elenco
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <p>JAC - Gestão Teatral</p>
+            <span>Versão 1.0</span>
+        </div>
+
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main-content">
+
+        <header class="top-header">
+
+            <div class="page-title">
+                <h2>Turmas</h2>
+                <p>Gerencie as turmas participantes da JAC.</p>
+            </div>
+
+            <div class="user-info">
+                <span>Administrador</span>
+            </div>
+
+        </header>
+
+        <!-- INDICADOR -->
+        <section class="dashboard-cards">
+
+            <div class="card">
+                <h3>Turmas inscritas</h3>
+                <span class="card-number" id="totalTurmas">0</span>
+                <p>Turmas participantes da JAC</p>
+            </div>
+
+        </section>
+
+        <!-- LISTAGEM DE TURMAS -->
+        <section class="content-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Turmas inscritas</h2>
+                    <p>Confira as turmas participantes do projeto.</p>
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-primary"
+                    data-open-modal>
+                    Nova turma
+                </button>
+
+            </div>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Turma</th>
+                            <th>Curso</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="turmasTable">
+                        <tr>
+                            <td colspan="3">
+                                Carregando turmas...
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!-- MODAL DE INSCRIÇÃO -->
+<div class="modal-overlay" id="turmaModal" hidden>
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <div>
+                <h2>Nova turma</h2>
+                <p>Selecione uma turma para participar da JAC.</p>
+            </div>
+
+            <button
+                type="button"
+                id="closeModal"
+                class="btn-close">
+                &times;
+            </button>
+
+        </div>
+
+        <form id="turmaForm">
+
+            <div class="form-group">
+
+                <label for="turmaDisponivel">
+                    Turma disponível
+                </label>
+
+                <select id="turmaDisponivel" required>
+                    <option value="">
+                        Carregando turmas...
+                    </option>
+                </select>
+
+            </div>
+
+            <p id="mensagemTurma"></p>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn-cancel"
+                    id="cancelModal">
+                    Cancelar
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn-primary">
+                    Inscrever turma
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="../js/turmas.js"></script>
+
+</body>
+</html>

@@ -4,6 +4,8 @@ const cors = require("cors");
 const conexao = require("./database");
 const estudantesRoutes = require("./rotas/estudantes");
 const turmasRoutes = require("./rotas/turmas");
+const orientadoresRoutes = require("./rotas/orientadores");
+const inscricoesRoutes = require("./rotas/inscricoes");
 
 const app = express();
 
@@ -11,6 +13,8 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/estudantes", estudantesRoutes);
 app.use("/api/turmas", turmasRoutes);
+app.use("/api/orientadores", orientadoresRoutes);
+app.use("/api/inscricoes", inscricoesRoutes);
 
 // Rota para testar o servidor e o banco
 app.get("/api/teste", async (req, res) => {

@@ -14,257 +14,103 @@
 
 <body>
 
-   
 <div class="app-container">
 
     <!-- MENU LATERAL -->
     <aside class="sidebar">
 
+        <div class="logo-container">
+            <h1>JAC</h1>
+            <span>Projeto de Artes Cênicas</span>
+        </div>
 
-<aside class="sidebar">
+        <nav class="sidebar-nav">
 
-    <!-- IDENTIFICAÇÃO -->
-    <div class="logo-container">
-        <h1>JAC</h1>
-        <span>Projeto de Artes Cênicas</span>
-    </div>
+            <h3>MENU PRINCIPAL</h3>
 
-    <!-- NAVEGAÇÃO -->
-    <nav class="sidebar-nav">
+            <a href="index.html" class="nav-link active">
+                Início
+            </a>
+            <a href="pages/turmas.html" class="nav-link">
+             Turmas
+            </a>
 
-        <h3>MENU PRINCIPAL</h3>
+            <a href="pages/orientadores.html" class="nav-link">
+                Orientadores
+            </a>
 
-        <a href="index.html" class="nav-link active">
-            Início
-        </a>
+            <a href="pages/estudantes.html" class="nav-link">
+                Estudantes
+            </a>
 
-        <a href="pages/cursos.html" class="nav-link">
-            Cursos
-        </a>
+            <h3>PRODUÇÃO TEATRAL</h3>
 
-        <button type="button" class="btn-primary" id="openModal">
-             Nova turma
-        </button>
+            <a href="pages/pecas.html" class="nav-link">
+                Peças
+            </a>
 
-        <a href="pages/orientadores.html" class="nav-link">
-            Orientadores
-        </a>
+            <a href="pages/elenco.html" class="nav-link">
+                Elenco
+            </a>
 
-        <a href="pages/estudantes.html" class="nav-link">
-            Estudantes
-        </a>
+        </nav>
 
-        <h3>PRODUÇÃO TEATRAL</h3>
-
-        <a href="pages/pecas.html" class="nav-link">
-            Peças
-        </a>
-
-        <a href="pages/elenco.html" class="nav-link">
-            Elenco
-        </a>
-
-    </nav>
-
-    <!-- RODAPÉ DO MENU -->
-    <div class="sidebar-footer">
-        <p>JAC - Gestão Teatral</p>
-        <span>Versão 1.0</span>
-    </div>
-
-</aside>
-
+        <div class="sidebar-footer">
+            <p>JAC - Gestão Teatral</p>
+            <span>Versão 1.0</span>
+        </div>
 
     </aside>
+
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="main-content">
 
+        <!-- CABEÇALHO -->
+        <header class="top-header">
 
-<main class="main-content">
-
-    <!-- CABEÇALHO -->
-    <header class="top-header">
-
-        <div class="page-title">
-            <h2>Painel Inicial</h2>
-            <p>Bem-vindo ao sistema de gerenciamento JAC.</p>
-        </div>
-
-        <div class="user-info">
-            <span>Administrador</span>
-        </div>
-
-    </header>
-
-</main>
-
-<!-- INDICADORES -->
-<section class="dashboard-cards">
-
-    <div class="card">
-        <h3>Cursos</h3>
-        <span class="card-number">02</span>
-        <p>Cursos cadastrados</p>
-    </div>
-
-    <div class="card">
-        <h3>Turmas</h3>
-        <span class="card-number" id="totalTurmas">0</span>
-        <p>Turmas inscritas</p>
-    </div>
-
-    <div class="card">
-        <h3>Estudantes</h3>
-        <span class="card-number">06</span>
-        <p>Estudantes cadastrados</p>
-    </div>
-
-    <div class="card">
-        <h3>Peças</h3>
-        <span class="card-number">03</span>
-        <p>Peças cadastradas</p>
-    </div>
-
-</section>
-
-
-<!-- LISTAGEM DE TURMAS -->
-<section class="content-section">
-
-    <div class="section-header">
-
-        <div>
-            <h2>Turmas inscritas</h2>
-            <p>Confira as turmas participantes do projeto.</p>
-        </div>
-
-        <button type="button" class="btn-primary" id="openModal">
-    Nova turma
-</button>
-
-    </div>
-
-   
-<div class="table-container">
-
-    <table>
-
-        <thead>
-            <tr>
-                <th>Turma</th>
-                <th>Curso</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-
-        <tbody id="turmasTable">
-
-            <!-- O JavaScript preencherá esta área -->
-
-        </tbody>
-
-    </table>
-
-</div>
-
-
-</section>
-
-
-<!-- MODAL DE CADASTRO DE TURMAS -->
-<div class="modal-overlay" id="turmaModal" hidden>
-
-    <div class="modal-content">
-
-        <div class="modal-header">
-
-            <div>
-                <h2>Nova turma</h2>
-                <p>Preencha os dados para realizar o cadastro.</p>
+            <div class="page-title">
+                <h2>Painel Inicial</h2>
+                <p>Bem-vindo ao sistema de gerenciamento JAC.</p>
             </div>
 
-            <button type="button" id="closeModal" class="btn-close">
-                &times;
-            </button>
-
-        </div>
-
-        <form id="turmaForm">
-
-           
-<!-- PERÍODO DA TURMA -->
-<div class="form-group">
-
-    <label for="periodo">
-        Período da turma
-    </label>
-
-    <input
-        type="text"
-        id="periodo"
-        placeholder="Ex: P4"
-        required
-        maxlength="10"
-    >
-
-</div>
-
-
-            <div class="form-group">
-
-                <label for="curso">
-                    Curso
-                </label>
-
-                <select id="curso" required>
-
-                    <option value="">Selecione um curso</option>
-
-                    <option value="Informática">
-                        Informática
-                    </option>
-
-                    <option value="Química">
-                        Química
-                    </option>
-
-                </select>
-
+            <div class="user-info">
+                <span>Administrador</span>
             </div>
 
-            <div class="modal-actions">
+        </header>
 
-                <button
-                    type="button"
-                    class="btn-cancel"
-                    id="cancelModal"
-                >
-                    Cancelar
-                </button>
 
-                <button
-                    type="submit"
-                    class="btn-primary"
-                >
-                    Cadastrar turma
-                </button>
+        <!-- INDICADORES -->
+        <section class="dashboard-cards">
 
+            <div class="card">
+                <h3>Cursos</h3>
+                <span class="card-number" id="totalCursos">0</span>
+                <p>Cursos cadastrados</p>
             </div>
 
-        </form>
+            <div class="card">
+                <h3>Turmas</h3>
+                <span class="card-number" id="totalTurmas">0</span>
+                <p>Turmas inscritas</p>
+            </div>
 
-    </div>
+            <div class="card">
+                <h3>Estudantes</h3>
+                <span class="card-number" id="totalEstudantes">0</span>
+                <p>Estudantes cadastrados</p>
+            </div>
 
-</div>
+            <div class="card">
+                <h3>Peças</h3>
+                <span class="card-number" id="totalPecas">0</span>
+                <p>Peças cadastradas</p>
+            </div>
 
-    </main>
-
-</div>
 
 <script src="js/main.js"></script>
 <script src="js/turmas.js"></script>
 
 </body>
-
 </html>
