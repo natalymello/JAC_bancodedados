@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JAC - Elenco</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- MENU LATERAL -->
+        <aside class="sidebar">
+
+            <div class="logo-container">
+                <h1>JAC</h1>
+                <span>Projeto de Artes Cênicas</span>
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <h3>MENU PRINCIPAL</h3>
+
+                <a href="../index.html" class="nav-link">Início</a>
+                <a href="turmas.html" class="nav-link">Turmas</a>
+                <a href="orientadores.html" class="nav-link">Orientadores</a>
+                <a href="estudantes.html" class="nav-link">Estudantes</a>
+
+                <h3>PRODUÇÃO TEATRAL</h3>
+
+                <a href="pecas.html" class="nav-link">Peças</a>
+                <a href="elenco.html" class="nav-link active">Elenco</a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>JAC - Gestão Teatral</p>
+                <span>Versão 1.0</span>
+            </div>
+
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-content">
+
+            <header class="top-header">
+                <div class="page-title">
+                    <h2>Elenco</h2>
+                    <p>Gerenciamento do elenco das peças teatrais.</p>
+                </div>
+
+                <div class="user-info">
+                    <span>Administrador</span>
+                </div>
+            </header>
+
+            <!-- FORMULÁRIO -->
+            <section class="content-section">
+
+                <div class="section-header">
+                    <div>
+                        <h2>Cadastrar no elenco</h2>
+                        <p>Selecione a peça, o estudante e informe a função no espetáculo.</p>
+                    </div>
+                </div>
+
+                <div class="table-container">
+
+                    <form id="elencoForm">
+
+                        <div class="form-group">
+                            <label for="peca">Peça</label>
+                            <select id="peca" required>
+                                <option value="">Carregando peças...</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="estudante">Estudante</label>
+                            <select id="estudante" required>
+                                <option value="">Carregando estudantes...</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="funcao">Função</label>
+                            <input
+                                type="text"
+                                id="funcao"
+                                placeholder="Ex.: Ator, Atriz, Diretor de cena"
+                                maxlength="100"
+                                required
+                            >
+                        </div>
+
+                        <div class="modal-actions">
+                            <button type="submit" class="btn-primary">
+                                Cadastrar no elenco
+                            </button>
+                        </div>
+
+                        <p id="mensagem"></p>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+            <!-- LISTAGEM -->
+            <section class="content-section">
+
+                <div class="section-header">
+                    <div>
+                        <h2>Elenco cadastrado</h2>
+                        <p>Consulte os participantes vinculados às peças.</p>
+                    </div>
+                </div>
+
+                <div class="table-container">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Peça</th>
+                                <th>Estudante</th>
+                                <th>Função</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="elencoTable">
+                            <tr>
+                                <td colspan="3">Carregando elenco...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/elenco.js"></script>
+
+</body>
+</html>
