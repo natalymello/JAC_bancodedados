@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS turma (
     id_turma INT AUTO_INCREMENT PRIMARY KEY,
     identificacao VARCHAR(50) NOT NULL,
     id_curso INT NOT NULL,
+    inscrita_jac BOOLEAN DEFAULT FALSE
 
     FOREIGN KEY (id_curso)
         REFERENCES curso(id_curso)
@@ -63,8 +64,6 @@ CREATE TABLE IF NOT EXISTS elenco (
     FOREIGN KEY (id_peca)
         REFERENCES peca(id_peca)
 );
-SHOW TABLES;
-
 
 -- DADOS FICTIONAIS --- TESTE
 
@@ -109,5 +108,3 @@ INSERT INTO elenco (id_estudante, id_peca, funcao) VALUES
 (4, 2, 'Figurinista'),
 (5, 3, 'Ator'),
 (6, 3, 'Cenografa');
-
-SELECT * FROM turma;
