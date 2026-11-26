@@ -6,7 +6,7 @@
 .dashboard-cards {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
+    gap: 15px;
 
     margin-bottom: 35px;
 }
@@ -15,10 +15,10 @@
     background-color: var(--surface);
 
     padding: 22px;
-    border-radius: 12px;
+    border-radius: 15px;
 
     border: 1px solid var(--border);
-    border-top: 5px solid var(--jac-red);
+    border-top: 10px solid var(--jac-red);
 
     box-shadow: 0 3px 12px rgba(37, 37, 37, 0.04);
 
@@ -40,20 +40,20 @@
 }
 
 .card:nth-child(4) {
-    border-top-color: var(--dark);
+    border-top-color: var(--jac-green);
 }
 
 .card h3 {
-    font-size: 14px;
-    color: var(--muted);
-    margin-bottom: 15px;
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 5px;
 }
 
 .card-number {
     display: block;
 
     font-family: Georgia, serif;
-    font-size: 34px;
+    font-size: 30px;
     font-weight: bold;
 
     color: var(--dark);
