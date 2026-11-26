@@ -1,3 +1,4 @@
+
 // =====================================
 // CONFIGURAÇÃO E ELEMENTOS DA PÁGINA
 // =====================================
@@ -11,29 +12,6 @@ const campoFuncao = document.getElementById("funcao");
 const mensagem = document.getElementById("mensagem");
 const tabela = document.getElementById("elencoTable");
 
-// =====================================
-// INTEGRAÇÃO ESPERADA COM O BACK-END
-// =====================================
-// GET  /api/pecas
-//   -> Lista peças para o select.
-//   -> Resposta esperada: [{ id_peca, nome, data_peca, turma, curso }, ...]
-//
-// GET  /api/estudantes
-//   -> Lista estudantes para o select.
-//   -> Resposta esperada: [{ id_estudante, nome, matricula, turma, curso }, ...]
-//
-// GET  /api/elenco
-//   -> Lista vínculos do elenco.
-//   -> Resposta esperada: [{ id_elenco, id_peca, peca, id_estudante, estudante, funcao }, ...]
-//
-// POST /api/elenco
-//   -> Cadastra vínculo no elenco.
-//   -> Body esperado: { id_peca, id_estudante, funcao }
-//   -> Resposta esperada: { mensagem, id_elenco }
-//
-// Observação:
-// - Confirme com quem fizer o back-end se o endpoint será /api/elenco ou /api/elencos.
-// - O importante é manter front e back com o mesmo caminho.
 
 // =====================================
 // 1. CARREGAR PEÇAS
@@ -59,11 +37,11 @@ async function carregarPecas() {
             return;
         }
 
-        pecas.forEach((peca) => {
+        pecas.forEach(peca => {
             const opcao = document.createElement("option");
 
             opcao.value = peca.id_peca;
-            opcao.textContent = `${peca.nome} - ${peca.turma}`;
+            opcao.textContent = `${peca.nome} - ${peca.turma || ""}`;
 
             campoPeca.appendChild(opcao);
         });
@@ -71,10 +49,11 @@ async function carregarPecas() {
         campoPeca.disabled = false;
 
     } catch (erro) {
-        console.error(erro);
+        console.error("Erro ao carregar peças:", erro);
         campoPeca.innerHTML = '<option value="">Erro ao carregar peças</option>';
     }
 }
+
 
 // =====================================
 // 2. CARREGAR ESTUDANTES
@@ -96,16 +75,15 @@ async function carregarEstudantes() {
         campoEstudante.innerHTML = '<option value="">Selecione um estudante</option>';
 
         if (!Array.isArray(estudantes) || estudantes.length === 0) {
-            campoEstudante.innerHTML =
-                '<option value="">Nenhum estudante cadastrado</option>';
+            campoEstudante.innerHTML = '<option value="">Nenhum estudante cadastrado</option>';
             return;
         }
 
-        estudantes.forEach((estudante) => {
+        estudantes.forEach(estudante => {
             const opcao = document.createElement("option");
 
             opcao.value = estudante.id_estudante;
-            opcao.textContent = `${estudante.nome} - ${estudante.turma}`;
+            opcao.textContent = `${estudante.nome} - ${estudante.turma || ""}`;
 
             campoEstudante.appendChild(opcao);
         });
@@ -113,11 +91,11 @@ async function carregarEstudantes() {
         campoEstudante.disabled = false;
 
     } catch (erro) {
-        console.error(erro);
-        campoEstudante.innerHTML =
-            '<option value="">Erro ao carregar estudantes</option>';
+        console.error("Erro ao carregar estudantes:", erro);
+        campoEstudante.innerHTML = '<option value="">Erro ao carregar estudantes</option>';
     }
 }
+
 
 // =====================================
 // 3. LISTAR ELENCO
@@ -150,7 +128,7 @@ async function carregarElenco() {
             return;
         }
 
-        elenco.forEach((item) => {
+        elenco.forEach(item => {
             const linha = document.createElement("tr");
 
             const colunaPeca = document.createElement("td");
@@ -170,7 +148,7 @@ async function carregarElenco() {
         });
 
     } catch (erro) {
-        console.error(erro);
+        console.error("Erro ao carregar elenco:", erro);
 
         tabela.innerHTML = `
             <tr>
@@ -179,6 +157,7 @@ async function carregarElenco() {
         `;
     }
 }
+
 
 // =====================================
 // 4. CADASTRAR NO ELENCO
@@ -207,30 +186,48 @@ formulario.addEventListener("submit", async (evento) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                id_peca,
-                id_estudante,
-                funcao
+                id_peca: Number(id_peca),
+                id_estudante: Number(id_estudante),
+                funcao: funcao
             })
         });
 
-        const resultado = await resposta.json().catch(() => ({}));
+        const textoResposta = await resposta.text();
+
+        let resultado = {};
+
+        if (textoResposta) {
+            try {
+                resultado = JSON.parse(textoResposta);
+            } catch (erroJson) {
+                resultado.mensagem = textoResposta;
+            }
+        }
+
+        console.log("Status do cadastro:", resposta.status);
+        console.log("Resposta do servidor:", resultado);
 
         if (!resposta.ok) {
-            throw new Error(resultado.mensagem || "Erro ao cadastrar no elenco.");
+            throw new Error(
+                resultado.mensagem || "Erro ao cadastrar no elenco."
+            );
         }
 
         mensagem.textContent = resultado.mensagem || "Cadastro realizado com sucesso!";
         mensagem.style.color = "green";
 
         formulario.reset();
+
         await carregarElenco();
 
     } catch (erro) {
-        console.error(erro);
+        console.error("Erro ao cadastrar:", erro);
+
         mensagem.textContent = erro.message;
         mensagem.style.color = "red";
     }
 });
+
 
 // =====================================
 // 5. INICIALIZAR PÁGINA

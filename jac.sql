@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS turma (
     id_turma INT AUTO_INCREMENT PRIMARY KEY,
     identificacao VARCHAR(50) NOT NULL,
     id_curso INT NOT NULL,
-    inscrita_jac BOOLEAN DEFAULT FALSE
+    inscrita_jac BOOLEAN DEFAULT FALSE,
 
     FOREIGN KEY (id_curso)
         REFERENCES curso(id_curso)

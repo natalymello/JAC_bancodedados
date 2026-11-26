@@ -7,6 +7,7 @@ const turmasRoutes = require("./rotas/turmas");
 const pecasRoutes = require("./rotas/pecas");
 const orientadoresRoutes = require("./rotas/orientadores");
 const inscricoesRoutes = require("./rotas/inscricoes");
+const elencoRoutes = require("./rotas/elenco");
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use("/api/turmas", turmasRoutes);
 app.use("/api/pecas", pecasRoutes);
 app.use("/api/orientadores", orientadoresRoutes);
 app.use("/api/inscricoes", inscricoesRoutes);
+app.use("/api/elenco", elencoRoutes);
 
 // Rota para testar o servidor e o banco
 app.get("/api/teste", async (req, res) => {
