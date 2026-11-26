@@ -4,6 +4,7 @@ const cors = require("cors");
 const conexao = require("./database");
 const estudantesRoutes = require("./rotas/estudantes");
 const turmasRoutes = require("./rotas/turmas");
+const pecasRoutes = require("./rotas/pecas");
 const orientadoresRoutes = require("./rotas/orientadores");
 const inscricoesRoutes = require("./rotas/inscricoes");
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/estudantes", estudantesRoutes);
 app.use("/api/turmas", turmasRoutes);
+app.use("/api/pecas", pecasRoutes);
 app.use("/api/orientadores", orientadoresRoutes);
 app.use("/api/inscricoes", inscricoesRoutes);
 

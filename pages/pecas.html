@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JAC - Peças</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- MENU LATERAL -->
+        <aside class="sidebar">
+
+            <div class="logo-container">
+                <h1>JAC</h1>
+                <span>Projeto de Artes Cênicas</span>
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <h3>MENU PRINCIPAL</h3>
+
+                <a href="../index.html" class="nav-link">
+                    Início
+                </a>
+
+                <a href="turmas.html" class="nav-link">
+                    Turmas
+                </a>
+
+                <a href="orientadores.html" class="nav-link">
+                    Orientadores
+                </a>
+
+                <a href="estudantes.html" class="nav-link">
+                    Estudantes
+                </a>
+
+                <h3>PRODUÇÃO TEATRAL</h3>
+
+                <a href="pecas.html" class="nav-link active">
+                    Peças
+                </a>
+
+                <a href="elenco.html" class="nav-link">
+                    Elenco
+                </a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>JAC - Gestão Teatral</p>
+                <span>Versão 1.0</span>
+            </div>
+
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-content">
+
+            <header class="top-header">
+
+                <div class="page-title">
+                    <h2>Peças</h2>
+                    <p>Gerenciamento das peças teatrais do projeto.</p>
+                </div>
+
+                <div class="user-info">
+                    <span>Administrador</span>
+                </div>
+
+            </header>
+
+            <!-- FORMULÁRIO -->
+            <section class="content-section">
+
+                <div class="section-header">
+                    <div>
+                        <h2>Cadastrar peça</h2>
+                        <p>Selecione uma turma inscrita na JAC, informe o nome da peça e escolha a data da apresentação.</p>
+                    </div>
+                </div>
+
+                <div class="table-container">
+
+                    <form id="pecaForm">
+
+                        <div class="form-group">
+                            <label for="nome">Nome da peça</label>
+                            <input
+                                type="text"
+                                id="nome"
+                                placeholder="Digite o nome da peça"
+                                maxlength="100"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dataPeca">Data da apresentação</label>
+                            <input
+                                type="date"
+                                id="dataPeca"
+                                min="2026-11-30"
+                                max="2026-12-04"
+                                required
+                            >
+                            <!-- Regra de negócio: janela permitida de 30/11/2026 a 04/12/2026 -->
+                        </div>
+
+                        <div class="form-group">
+                            <label for="turma">Turma inscrita na JAC</label>
+                            <select id="turma" required>
+                                <option value="">Carregando turmas...</option>
+                            </select>
+                            <!-- Regra de negócio: apenas turmas previamente inscritas na JAC -->
+                        </div>
+
+                        <div class="modal-actions">
+                            <button type="submit" class="btn-primary">
+                                Cadastrar peça
+                            </button>
+                        </div>
+
+                        <p id="mensagem"></p>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+            <!-- LISTAGEM -->
+            <section class="content-section">
+
+                <div class="section-header">
+                    <div>
+                        <h2>Peças cadastradas</h2>
+                        <p>Consulte as peças registradas no sistema.</p>
+                    </div>
+                </div>
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Peça</th>
+                                <th>Data</th>
+                                <th>Turma</th>
+                                <th>Curso</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="pecasTable">
+                            <tr>
+                                <td colspan="4">Carregando peças...</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/pecas.js"></script>
+
+</body>
+</html>
